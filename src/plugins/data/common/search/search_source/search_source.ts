@@ -112,6 +112,7 @@ export const searchSourceRequiredUiSettings = [
   UI_SETTINGS.COURIER_MAX_CONCURRENT_SHARD_REQUESTS,
   UI_SETTINGS.COURIER_SET_REQUEST_PREFERENCE,
   UI_SETTINGS.DOC_HIGHLIGHT,
+  UI_SETTINGS.DOC_HIGHLIGHT_MAX_ANALYZED_OFFSET,
   UI_SETTINGS.META_FIELDS,
   UI_SETTINGS.QUERY_ALLOW_LEADING_WILDCARDS,
   UI_SETTINGS.QUERY_STRING_OPTIONS,
@@ -855,7 +856,7 @@ export class SearchSource {
     body.query = buildEsQuery(index, query, filters, esQueryConfigs);
 
     if (highlightAll && body.query) {
-      body.highlight = getHighlightRequest(getConfig(UI_SETTINGS.DOC_HIGHLIGHT));
+      body.highlight = getHighlightRequest(getConfig(UI_SETTINGS.DOC_HIGHLIGHT),getConfig(UI_SETTINGS.DOC_HIGHLIGHT_MAX_ANALYZED_OFFSET));
       delete searchRequest.highlightAll;
     }
 
